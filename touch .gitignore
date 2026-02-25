@@ -1,0 +1,7 @@
+.env
+nginx/*.swp
+vendor/
+node_modules/
+src/vendor/
+src/node_modules/
+src/.env
