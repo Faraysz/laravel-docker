@@ -3,7 +3,7 @@ node {
 
  stage("Build"){
   docker.image('shippingdocker/php-composer:7.4').inside('-u root') {
-   sh 'rm composer.lock'
+   sh 'rm -f composer.lock'
    sh 'composer install'
   }
  }
