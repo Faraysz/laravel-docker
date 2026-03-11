@@ -21,15 +21,21 @@ node {
     }
 
     stage("Deploy") {
-        docker.image('alpine').inside('-u root') {
-            sshagent (credentials: ['ssh-prod']) {
-                sh """
-                mkdir -p ~/.ssh
-                ssh-keyscan -H ${PROD_HOST} >> ~/.ssh/known_hosts
-                rsync -rav ./ faraysz@${PROD_HOST}:/home/faraysz/laravel-app
-                """
-            }
+    docker.image('ubuntu').inside('-u root') {
+        sh '''
+        apt update
+        apt install -y openssh-client rsync
+        '''
+        
+        sshagent (credentials: ['ssh-prod']) {
+            sh '''
+            mkdir -p ~/.ssh
+            ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
+
+            rsync -avz ./ faraysz@127.0.0.1:/home/faraysz/laravel-app
+            '''
         }
     }
+}
 
 }
