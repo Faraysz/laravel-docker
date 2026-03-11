@@ -27,12 +27,12 @@ node {
         apt install -y openssh-client rsync
         '''
         
-        sshagent (credentials: ['ssh-prod']) {
+        sshagent (credentials: ['faraysz']) {
             sh '''
             mkdir -p ~/.ssh
             ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
 
-            rsync -avz ./ faraysz@127.0.0.1:/home/faraysz/laravel-app
+            rsync -avz ./ faraysz@127.0.0.1:/home/faraysz/laravel-deploy
             '''
         }
     }
