@@ -4,15 +4,17 @@ node {
 
     stage("Build") {
         docker.image('shippingdocker/php-composer:7.4').inside('-u root') {
-            sh 'cd src'
-            sh 'rm -f composer.lock'
-            sh 'composer install'
+            sh '''
+            cd src
+            rm -f composer.lock
+            composer install
+            '''
         }
     }
 
     stage("Testing") {
         docker.image('ubuntu').inside('-u root') {
-            sh 'echo "Ini adalah test pipeline Jenkins"'
+            sh 'echo "Pipeline Jenkins berhasil dijalankan"'
         }
     }
 
