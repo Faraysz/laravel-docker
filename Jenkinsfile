@@ -27,7 +27,7 @@ node {
         apt install -y openssh-client rsync
         '''
         
-        sshagent (credentials: ['faraysz']) {
+        sshagent (credentials: ['ssh-prod']) {
             sh '''
             mkdir -p ~/.ssh
             ssh-keyscan -H 127.0.0.1 >> ~/.ssh/known_hosts
